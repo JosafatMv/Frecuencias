@@ -1,4 +1,6 @@
 import { table } from '../components/table.js';
+import { showBarChart } from '../components/charts/bars.js';
+
 
 const form = document.getElementById('form');
 const tableHtml = document.getElementById('table');
@@ -56,6 +58,7 @@ const frecuency = (data) => {
 		const fx2 = Math.pow(fx, 2);
 
 		rowsData.push({
+			class: i + 1,
 			initialInterval,
 			finalInterval,
 			frequency,
@@ -76,5 +79,6 @@ form.addEventListener('submit', (e) => {
 	const arrData = formatData(data);
 	const orderedData = orderData(arrData);
 	const frecuencyData = frecuency(orderedData);
+	showBarChart(frecuencyData);
 	tableHtml.innerHTML = table(frecuencyData);
 });
