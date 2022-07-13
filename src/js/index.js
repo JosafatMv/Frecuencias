@@ -1,6 +1,7 @@
 import { table } from '../components/table.js';
 import { showBarChart } from '../components/charts/bars.js';
-
+import { showLineChart } from '../components/charts/line.js';
+import { showOjivaChart } from '../components/charts/ojiva.js';
 
 const form = document.getElementById('form');
 const tableHtml = document.getElementById('table');
@@ -18,6 +19,17 @@ const orderData = (data) => {
 	return arrOrdered;
 };
 
+const calcIntervalClass = (maxValue, minValue, classes) => {
+	let intervalClass = (maxValue - minValue) / classes;
+	const remainder = intervalClass - parseInt(intervalClass);
+
+	remainder > 0.5
+		? (intervalClass = Math.round(intervalClass) + 1)
+		: (intervalClass = Math.floor(intervalClass) + 1);
+
+	return intervalClass;
+};
+
 const frecuency = (data) => {
 	console.log(data);
 	const n = data.length;
@@ -33,8 +45,7 @@ const frecuency = (data) => {
 		}
 	}
 
-	const intervalClass = Math.round((maxValue - minValue) / classes) + 1;
-
+	const intervalClass = calcIntervalClass(maxValue, minValue, classes);
 	const initialValue = minValue;
 
 	let rowsData = [];
@@ -79,6 +90,9 @@ form.addEventListener('submit', (e) => {
 	const arrData = formatData(data);
 	const orderedData = orderData(arrData);
 	const frecuencyData = frecuency(orderedData);
+	console.log(frecuencyData);
 	showBarChart(frecuencyData);
+	showLineChart(frecuencyData);
+	showOjivaChart(frecuencyData);
 	tableHtml.innerHTML = table(frecuencyData);
 });

@@ -16,8 +16,16 @@ export const showBarChart = (data) => {
 	showChart(labels, dataChart, backgroundColor, borderColor);
 };
 
+const destroyChartIfNecessary = (chartId) => {
+	let chartStatus = Chart.getChart(chartId);
+	if (chartStatus != undefined) {
+		chartStatus.destroy();
+	}
+};
+
 const showChart = (labels, data, backgroundColor, borderColor) => {
 	console.log(labels, data, backgroundColor, borderColor);
+	destroyChartIfNecessary('myChart');
 	const ctx = document.getElementById('myChart').getContext('2d');
 	const myChart = new Chart(ctx, {
 		type: 'bar',

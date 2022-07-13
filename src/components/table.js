@@ -1,5 +1,11 @@
 import { row } from './row.js';
 
+/**
+ * It takes an array of objects and returns a string of HTML
+ * @param data - Array of objects with the following properties:
+ * @returns A string.
+ */
+
 export const table = (data) => {
 	return `
     <div class="bg-white p-8 rounded-md w-full">
@@ -50,10 +56,13 @@ export const table = (data) => {
                             <tr>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 </td>
+
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap"></td>
+                                    <p class="text-gray-900 whitespace-no-wrap"></p>
+                                </td>
+
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">
+                                    <p class="text-back font-bold whitespace-no-wrap">
                                         ${data.reduce(
 											(acc, rowData) =>
 												acc + rowData.frequency,
@@ -61,28 +70,43 @@ export const table = (data) => {
 										)}
                                     </p>
                                 </td>
+
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap"></td>
-                                <td class="px-5 py-5 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">${data.reduce(
-										(acc, rowData) =>
-											acc + rowData.frecuencyRelative,
-										0
-									)}</p>
+                                    <p class="text-gray-900 whitespace-no-wrap"></p>
                                 </td>
+
                                 <td class="px-5 py-5 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap"></td>
-                                <td class="px-5 py-5 bg-white text-sm">${data.reduce(
-									(acc, rowData) => acc + rowData.fx,
-									0
-								)}</p>
+                                    <p class="text-black font-bold whitespace-no-wrap">
+                                        ${data.reduce(
+											(acc, rowData) =>
+												acc + rowData.frecuencyRelative,
+											0
+										)}
+                                    </p>
                                 </td>
-                                <td class="px-5 py-5 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">${data.reduce(
-										(acc, rowData) => acc + rowData.fx2,
-										0
-									)}</p>
+                                
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap"></p>
                                 </td>
+
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-black font-bold whitespace-no-wrap">
+                                        ${data.reduce(
+                                            (acc, rowData) => acc + rowData.fx,
+                                            0
+                                        )}
+                                    </p>
+                                </td>
+
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-black font-bold whitespace-no-wrap">
+                                        ${data.reduce(
+											(acc, rowData) => acc + rowData.fx2,
+											0
+										)}
+                                    </p>
+                                </td>
+
                             </tr>
                         </tbody>
                     </table>
